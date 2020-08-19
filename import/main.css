@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+:root {
+    --left-side-width: 4.2rem;
+    --right-side-width: 0.5rem;
+}
+
+* {
+    scrollbar-color: #fbf1c788 #fbf1c733;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fbf1c733;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fbf1c788;
+}
+
+body {
+    font-family: "Source Code Pro", "Noto Sans TC", sans-serif;
+    background-color: #252525;
+    color: #fbf1c7;
+    font-size: 1rem;
+    margin-left: var(--left-side-width);
+    margin-right: var(--right-side-width);
+}
+
+@media screen and (max-width: 800px) {
+    :root {
+        --left-side-width: 4.7rem;
+        --right-side-width: 0.5rem;
+    }
+}
+@media screen and (min-width: 800px) {
+    :root {
+        --left-side-width: 15%;
+        --right-side-width: 15%;
+    }
+}
+@media screen and (min-width: 900px) {
+    :root {
+        --left-side-width: 20%;
+        --right-side-width: 20%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    :root {
+        --left-side-width: 25%;
+        --right-side-width: 25%;
+    }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1rem;
+    color: #d79921;
+    padding: 0rem;
+    margin: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5em;
+    /* font-weight: lighter; */
+}
+
+blockquote > h1,
+blockquote > h2,
+blockquote > h3,
+blockquote > h4,
+blockquote > h5,
+blockquote > h6 {
+    font-size: 1rem;
+    color: #d79921;
+    padding: 0rem;
+    margin: 0rem;
+    /* margin-bottom: 1.5rem; */
+}
+
+h1 {
+    margin-left: -1.2rem;
+}
+h1::before {
+    content: "# ";
+    color: #fb492f;
+}
+
+h2 {
+    margin-left: -1.8rem;
+}
+h2::before {
+    content: "## ";
+    color: #fb492f;
+}
+
+h3 {
+    margin-left: -2.4rem;
+}
+h3::before {
+    content: "### ";
+    color: #fb492f;
+}
+
+h4 {
+    margin-left: -3rem;
+}
+h4::before {
+    content: "#### ";
+    color: #fb492f;
+}
+
+h5 {
+    margin-left: -3.6rem;
+}
+h5::before {
+    content: "##### ";
+    color: #fb492f;
+}
+
+h6 {
+    margin-left: -4.2rem;
+}
+h6::before {
+    content: "###### ";
+    color: #fb492f;
+}
+
+blockquote {
+    color: #69d3ee;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    line-height: 1.5rem;
+    float: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.25rem;
+    overflow: hidden;
+}
+
+blockquote > blockquote {
+    margin: 0;
+}
+
+blockquote::after {
+    color: #98971a;
+    font-weight: bold;
+    content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>";
+    white-space: pre;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 1.5rem;
+}
+
+a {
+    cursor: pointer;
+    color: #ff2e88;
+    text-decoration: none;
+    border-bottom: 1px solid #ff2e88;
+}
+
+a:visited {
+    color: #d19eb4;
+    border-color: #d19eb4;
+}
+
+a:visited:hover {
+    color: #fbf1c7;
+    background-color: #d19eb4;
+}
+
+a:hover {
+    background-color: #ff2e88;
+    color: #fbf1c7;
+}
+
+::selection {
+    background-color: #d19eb4;
+    /* color: #FBF1C7; */
+}
+
+p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+ul {
+    padding: 0;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: block;
+    padding-left: 1.2rem;
+    line-height: 1.5rem;
+}
+
+ul > li::after {
+    content: "-";
+    font-weight: bold;
+}
+
+li::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+img {
+    padding: 0rem;
+    margin: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+strong {
+    color: #b8bb27;
+}
+
+video {
+    padding: 0rem;
+    margin: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+div.block {
+}
+
+table {
+    padding: 0rem;
+    margin: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    color: #eee;
+
+    border-collapse: collapse;
+}
+
+tr:last-child th,
+tr:last-child td {
+    border-bottom: 0rem;
+}
+th,
+td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+    border-bottom: 0rem;
+    border-bottom: 0.1rem solid #eee;
+}
+.text-lg {
+    font-size: 1.5rem;
+}
+.text-xl {
+    font-size: 1.8rem;
+}
+.text-2xl {
+    font-size: 2rem;
+}
+.text-3xl {
+    font-size: 2.2rem;
+}
+.math {
+    overflow-y: hidden;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.math-xs {
+    height: 1.5rem;
+    width: auto;
+}
+.math-sm {
+    height: 2.2rem;
+    width: auto;
+}
+.math-base {
+    height: 3rem;
+    width: auto;
+}
+.math-lg {
+    height: 5rem;
+    width: auto;
+}
+.math-xl {
+    height: 6rem;
+    width: auto;
+}
+.math-2xl {
+    height: 8rem;
+    width: auto;
+}
+.math-3xl {
+    height: 10rem;
+    width: auto;
+}
+.math-4xl {
+    height: 12rem;
+    width: auto;
+}
+.math-5xl {
+    height: 14rem;
+    width: auto;
+}
+
+*:not(pre) > code {
+    font-family: "Source Code Pro", "Noto Sans TC", sans-serif;
+    color: #b8bb27;
+}
+*:not(pre) > code::before {
+    content: " `";
+    color: #fbf1c7;
+}
+*:not(pre) > code::after {
+    content: "` ";
+    color: #fbf1c7;
+}
+pre code {
+    font-family: "Source Code Pro", "Noto Sans TC", sans-serif;
+    border-left: 0.1rem #fbf1c788 solid;
+    padding-left: 1.15rem !important;
+}
+
+ul.directory > li::after {
+    content: "+";
+    font-weight: bold;
+    color: #ff2e88;
+}
