@@ -2,13 +2,42 @@
 <html>
 
 <head>
+    <script src="./draw.js" defer></script>
+    <script src="./audio_process.js" defer></script>
     <script src="./index.js" defer></script>
 </head>
 
 <body>
-
-    <button id="start">start</button>
-    <canvas id="canvas" width="400" height="200"></canvas>
+    <button id="getUserMedia">getUserMedia</button>
+    <div id="viewport" hidden>
+        <button id="start">start</button>
+        <button id="stop" hidden>stop</button>
+        <hr />
+        <h3>Wave</h3>
+        <hr />
+        <canvas id="wave" width="400" height="200"></canvas>
+        <hr />
+        <h3>Energy</h3>
+        <hr />
+        <canvas id="energy" width="400" height="200"></canvas>
+        <hr />
+        <h3>Zero Crossing Rate</h3>
+        <hr />
+        <canvas id="zero-crossing-rate" width="400" height="200"></canvas>
+        <hr />
+        <h3>Auto Correlation</h3>
+        <input type="number" min="0" max="0" id="ac-frame" />
+        <hr />
+        <canvas id="auto-correlation" width="400" height="200"></canvas>
+        <hr />
+        <h3>Pitch</h3>
+        <hr />
+        <canvas id="pitch" width="400" height="200"></canvas>
+        <hr />
+        <h3>End Point Detection</h3>
+        <hr />
+        <canvas id="end-point-detection" width="400" height="200"></canvas>
+    </div>
 </body>
 
 </html>
