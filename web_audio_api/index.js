@@ -105,7 +105,6 @@ document.getElementById("getUserMedia").onclick = () => {
                 document.getElementById("stop").hidden = false
                 ac_frame.max = 0
                 data = []
-                console.log(data)
                 gainNode.connect(audioCtx.destination)
             }
             const stop = () => {
@@ -117,28 +116,29 @@ document.getElementById("getUserMedia").onclick = () => {
 
                 gainNode.disconnect()
 
+                let energy = useWindow(
+                    // data.map(val => Math.abs(val)),
+                    data.map(val => val ** 2),
+                    hw,
+                    sampleRate * 0.016)
                 drawBar(wave_canvas, wave_ctx, data)
                 drawLine(
                     energy_canvas,
                     energy_ctx,
                     (() => {
-                        let energy = useWindow(
-                            data.map(val => Math.abs(val)),
-                            hw,
-                            sampleRate * 0.016)
                         let max = energy.reduce((prev, curr) => prev >= curr ? prev : curr, 0)
                         return energy.map(val => val / max)
                     })()
                 )
 
+                let zcr = zeroCrossingRate(
+                    data,
+                    sampleRate * 0.032,
+                    sampleRate * 0.016)
                 drawLine(
                     zcr_canvas,
                     zcr_ctx,
                     (() => {
-                        let zcr = zeroCrossingRate(
-                            data,
-                            sampleRate * 0.032,
-                            sampleRate * 0.016)
                         let max = zcr.reduce((prev, curr) => prev >= Math.abs(curr) ? prev : Math.abs(curr), 0)
                         return zcr.map(val => val / max)
                     })()
@@ -181,7 +181,29 @@ document.getElementById("getUserMedia").onclick = () => {
                     })()
                 )
 
+                // console.log(energy, zcr)
+                let { begin, end } = endPointDetection(energy, zcr, 30, 100)
+                console.log(begin, end)
+                wave_ctx.strokeStyle = "#2e88ff"
+                addVerticalLine(wave_canvas, wave_ctx, begin / energy.length)
+                addVerticalLine(wave_canvas, wave_ctx, end / energy.length)
+                wave_ctx.strokeStyle = "#ff2e88"
 
+
+                energy_ctx.strokeStyle = "#2e88ff"
+                addVerticalLine(energy_canvas, energy_ctx, begin / energy.length)
+                addVerticalLine(energy_canvas, energy_ctx, end / energy.length)
+                energy_ctx.strokeStyle = "#ff2e88"
+
+                zcr_ctx.strokeStyle = "#2e88ff"
+                addVerticalLine(zcr_canvas, zcr_ctx, begin / energy.length)
+                addVerticalLine(zcr_canvas, zcr_ctx, end / energy.length)
+                zcr_ctx.strokeStyle = "#ff2e88"
+
+                pitch_ctx.strokeStyle = "#2e88ff"
+                addVerticalLine(pitch_canvas, pitch_ctx, begin / energy.length)
+                addVerticalLine(pitch_canvas, pitch_ctx, end / energy.length)
+                pitch_ctx.strokeStyle = "#ff2e88"
             }
 
             document.getElementById("start").onclick = start

@@ -20,7 +20,7 @@ const hammingWindow = (frameSize, alpha = 0.53836) => {
 const conv = (input, kernel) => {
     // console.log(input)
     // console.log(kernel)
-    let _kernel = kernel.reverse()
+    let _kernel = kernel.slice().reverse()
     return new Array(input.length - kernel.length + 1)
         .fill(0)
         .map((_, shift) => {
@@ -38,7 +38,7 @@ const conv = (input, kernel) => {
  */
 const autoCorrelation = (input) => {
     let _input = input.concat(new Array(input.length - 1).fill(0))
-    let kernel = input.reverse()
+    let kernel = input.slice().reverse()
     return conv(_input, kernel)//.map(val => val / input.length)
 }
 
@@ -154,4 +154,72 @@ const pitch = (input, sampleRate, chackN) => {
         return sampleRate / (pitch_data.idx / (pitch_data.count - 1))
     }
 
+}
+
+
+/**
+ * 
+ * @param {Array} energy 
+ * @param {Array} zcr
+ * @param {number} N
+ * @param {number} IF
+ * @returns {{begin:number, end:number}}
+ */
+const endPointDetection = (energy, zcr, N = 10, IF = 25) => {
+    const IMX = energy.slice(0, N).reduce((prev, curr) => prev >= curr ? prev : curr, 0)
+    const IMN = energy.slice(0, N).reduce((prev, curr) => prev <= curr ? prev : curr, IMX)
+    const i1 = 0.03 * (IMX - IMN) + IMN
+    const i2 = 4 * IMN
+    const ITL = Math.min(i1, i2)
+    const ITU = 5 * ITL
+
+    const IZC = zcr.slice(0, N).reduce((prev, curr) => prev + curr, 0) / N
+    const SD = Math.sqrt(
+        zcr.slice(0, N).reduce((prev, curr) => prev + (curr - IZC) ** 2, 0) / N
+    )
+    const IZCT = Math.min(IF, IZC + 2 * SD)
+
+    const _endPointDetection = (_log_energy, _zcr) => {
+        const ITU_idx = _log_energy.reduce((prev, curr, idx) => {
+            if (prev == -1) {
+                if (curr >= ITU) {
+                    prev = idx
+                }
+            }
+            return prev
+        }, -1)
+
+        const ITL_idx = _log_energy
+            .slice(0, ITU_idx)
+            .reduceRight((prev, curr, idx) => {
+                if (prev == -1) {
+                    if (curr <= ITL) {
+                        prev = idx
+                    }
+                }
+                return prev
+            }, -1)
+
+        const IZCT_idx = _zcr
+            .slice(0, ITL_idx)
+            .reduceRight((prev, curr, idx) => {
+                if (prev == -1) {
+                    if (curr <= IZCT) {
+                        prev = idx
+                    }
+                }
+                return prev
+            }, -1)
+        return IZCT_idx
+
+    }
+    const log_energy = energy.map(val => Math.log(val))
+
+    return {
+        begin: _endPointDetection(log_energy, zcr),
+        end: log_energy.length - 1 -
+            _endPointDetection(
+                log_energy.slice().reverse(),
+                zcr.slice().reverse())
+    }
 }

@@ -33,3 +33,20 @@ const drawBar = (canvas, ctx, data) => {
         )
     })
 }
+
+/**
+ * 
+ * @param {HTMLCanvasElement} canvas
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {number} at 
+ */
+const addVerticalLine = (canvas, ctx, at) => {
+    ctx.beginPath()
+    ctx.lineTo(
+        canvas.width * at,
+        0)
+    ctx.lineTo(
+        canvas.width * at,
+        canvas.height)
+    ctx.stroke()
+}
