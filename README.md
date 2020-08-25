@@ -4,4 +4,4 @@
 
 ## [自然語言處理簡介](https://toonnyy8.github.io/mhmc/nlp/)
 
-## [SpeakerRecognition](https://toonnyy8.github.io/mhmc/nlp/)
+## [SpeakerRecognition](https://colab.research.google.com/github/toonnyy8/mhmc/blob/master/SpeakerRecognition/SpeakerRecognition.ipynb)
