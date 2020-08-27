@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url(../import/main.css);
+    </style>
+    <title>NLP 應用介紹</title>
+</head>
+
+<body>
+    <!-- <div class="container"> -->
+    <h1><a href="https://arxiv.org/abs/1706.03762">NLP 應用介紹</a></h1>
+    <ul class="directory">
+        <li>
+            <a href="#翻譯">翻譯</a>
+        </li>
+        <li>
+            <a href="#文本生成">文本生成</a>
+        </li>
+        <li>
+            <a href="#圖片描述">圖片描述</a>
+        </li>
+    </ul>
+    <div class="block">
+        <h2 id="翻譯">翻譯</h2>
+        <div class="block">
+            <h3>應用範例--Google Translate</h3>
+            <div class="block">
+                <a href="https://translate.google.com.tw/">Google Translate</a>
+                <a href="./img/translation.png">
+                    <img src="./img/translation.png" />
+                </a>
+            </div>
+            <h3>代表性模型--Transformer</h3>
+            <div class="block">
+                <p>
+                    在 2017 年，由 self attention 構成的新模型 Transformer 被提出。<br>
+                    最初使用在文本翻譯的研究上，從而推廣至整個 NLP 領域。<br>
+                    但實際上，只要能將問題轉換成<strong>「N個一維張量」</strong>，就能使用 Transformer 處理。
+                </p>
+                <h4>優點</h4>
+                <ul>
+                    <li><strong>快速</strong>：跟 RNN 類的模型相比，可將輸入序列做平行運算。</li>
+                    <li><strong>長距離關注</strong>：跟 CNN 類的模型相比，可依據輸入序列長度動態改變感受野。</li>
+                </ul>
+                <h4>缺點</h4>
+                <ul>
+                    <li><strong>記憶體使用量過大</strong>，受硬體設備限制了其關注距離。</li>
+                </ul>
+                <h4>改進</h4>
+                <ul>
+                    <li><strong>Universal Transformer</strong>：利用 ACT 機制，讓模型自己決定要做幾次 Encoder/Decoder。</li>
+                    <li><strong>Transformer XL</strong>：加入 Segment-level Recurrence 機制，使其關注距離可以擺脫硬體限制而大幅提升。</li>
+                    <li><strong>Reformer</strong>：使用 Locality Sensitive Hashing (還沒看明白...) 減少原版記憶體消耗量，從 O(L<sup>2</sup>)
+                        降到 O(L*log(L))。
+                    </li>
+                    <li><strong>Linformer</strong>：更改 Self Attention 的計算方式，藉由將
+                        K、V 的語句長度 L 壓縮到壓縮到常數 N，使記憶體消耗量降到 O(L)。<br />
+                        不過這個其實有點灌水的嫌疑，因為實際上 N 還是要隨 L 變更大小才能有良好的效果。</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 id="文本生成">文本生成</h2>
+        <div class="block">
+            <h3>應用範例--AI Dungeon</h3>
+            <div class="block">
+                <a href="https://play.aidungeon.io/">AI Dungeon</a>
+                <a href="./img/AIDungeon.png">
+                    <img src="./img/AIDungeon.png" />
+                </a>
+                <p>
+                    AI Dungeon 是使用深度學習生成文本的文字冒險遊戲。
+                    藉由玩家設定的角色生成背景故事，
+                    並利用玩家輸入的行動文本來產生接續的劇情，以此達成高自由度的遊戲體驗。</p>
+            </div>
+            <h3>代表性模型--GPT 系列</h3>
+            <div class="block">
+                <p>
+                    GPT 系列的主結構是 Transformer Decoder。<br />
+                    吐槽：GPT 3 現在已經成為了「財力的象徵」。
+                </p>
+            </div>
+        </div>
+
+        <h2 id="圖片描述">圖片描述</h2>
+        <div class="block">
+            <a href="https://www.tensorflow.org/tutorials/text/image_captioning#try_it_on_your_own_images">colab
+                範例</a>
+            <p>
+                Image Captioning 的技術能給出輸入的圖片的情境描述，<br />
+                藉著此方法就可以製作出視障人士的輔助系統，以增加其生活的便利性。
+            </p>
+        </div>
+    </div>
+    <!-- </div> -->
+</body>
+
+</html>
