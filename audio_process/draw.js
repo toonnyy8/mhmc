@@ -5,13 +5,13 @@
  * @param {CanvasRenderingContext2D} ctx
  * @param {Array} data 
  */
-const drawLine = (canvas, ctx, data) => {
+const drawLine = (canvas, ctx, data, center = 0.5) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.beginPath()
     data.forEach((val, idx) => {
         ctx.lineTo(
             canvas.width * (idx / data.length),
-            (canvas.height / 2) * (1 - val));
+            (canvas.height * center) * (1 - val));
     })
     ctx.stroke();
 }
@@ -22,7 +22,7 @@ const drawLine = (canvas, ctx, data) => {
  * @param {CanvasRenderingContext2D} ctx
  * @param {Array} data 
  */
-const drawBar = (canvas, ctx, data) => {
+const drawBar = (canvas, ctx, data, center = 0.5) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     data.forEach((val, idx) => {
         ctx.fillRect(

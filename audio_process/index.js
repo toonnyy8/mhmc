@@ -65,16 +65,6 @@ document.getElementById("getUserMedia").onclick = () => {
             pitch_ctx.fillStyle = "#ff2e88"
             pitch_ctx.strokeStyle = "#ff2e88"
 
-            /**
-             * @type {HTMLCanvasElement}
-             */
-            const epd_canvas = document.getElementById("end-point-detection")
-            const epd_ctx = epd_canvas.getContext("2d")
-            epd_ctx.clearRect(0, 0, epd_canvas.width, epd_canvas.height)
-            epd_ctx.fillStyle = "#ff2e88"
-            epd_ctx.strokeStyle = "#ff2e88"
-
-
             const sampleRate = stream
                 .getAudioTracks()[0]
                 .getSettings()
@@ -127,8 +117,10 @@ document.getElementById("getUserMedia").onclick = () => {
                     energy_ctx,
                     (() => {
                         let max = energy.reduce((prev, curr) => prev >= curr ? prev : curr, 0)
+                        document.getElementById("energy-max").innerText = Math.round(max * 100) / 100
                         return energy.map(val => val / max)
-                    })()
+                    })(),
+                    1
                 )
 
                 let zcr = zeroCrossingRate(
@@ -140,8 +132,10 @@ document.getElementById("getUserMedia").onclick = () => {
                     zcr_ctx,
                     (() => {
                         let max = zcr.reduce((prev, curr) => prev >= Math.abs(curr) ? prev : Math.abs(curr), 0)
+                        document.getElementById("zero-crossing-rate-max").innerText = Math.round(max * 100) / 100
                         return zcr.map(val => val / max)
-                    })()
+                    })(),
+                    1
                 )
 
                 let ac_data = new Array(Number(ac_frame.max) + 1)
@@ -177,12 +171,14 @@ document.getElementById("getUserMedia").onclick = () => {
                     (() => {
                         let p = ac_data.map(val => pitch(val, sampleRate, 5))
                         let max = p.reduce((prev, curr) => prev >= Math.abs(curr) ? prev : Math.abs(curr), 0)
+                        document.getElementById("pitch-max").innerText = Math.round(max * 100) / 100
                         return p.map(val => val / max)
-                    })()
+                    })(),
+                    1
                 )
 
                 // console.log(energy, zcr)
-                let { begin, end } = endPointDetection(energy, zcr, 30, 100)
+                let { begin, end } = endPointDetection(energy, zcr, 30, Number(document.getElementById("IF").value))
                 console.log(begin, end)
                 wave_ctx.strokeStyle = "#2e88ff"
                 addVerticalLine(wave_canvas, wave_ctx, begin / energy.length)
