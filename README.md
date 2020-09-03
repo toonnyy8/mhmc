@@ -7,3 +7,5 @@
 ## [SpeakerRecognition](./SpeakerRecognition/)
 
 ## [MultimediaProcessing](./MultimediaProcessing/)
+
+## [HW_topic_detection](./HW_topic_detection/)
