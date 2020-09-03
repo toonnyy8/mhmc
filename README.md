@@ -5,3 +5,5 @@
 ## [自然語言處理簡介](https://toonnyy8.github.io/mhmc/nlp_application/)
 
 ## [SpeakerRecognition](./SpeakerRecognition/)
+
+## [MultimediaProcessing](./MultimediaProcessing/)
